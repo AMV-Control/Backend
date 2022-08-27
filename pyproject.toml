@@ -10,6 +10,7 @@ fastapi = "^0.67.0"
 uvicorn = "^0.18.3"
 SQLAlchemy = "^1.4.40"
 pydantic = {extras = ["dotenv"], version = "^1.9.2"}
+sqlmodel = "^0.0.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
