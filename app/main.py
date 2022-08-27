@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 
+from . import routers
+
 
 def get_application():
     _app = FastAPI(title=settings.PROJECT_NAME)
@@ -19,3 +21,5 @@ def get_application():
 
 
 app = get_application()
+
+app.include_router(routers.router)
