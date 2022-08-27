@@ -4,7 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 
 from . import routers
-from .database import init_db
 
 
 def get_application():
@@ -24,8 +23,3 @@ def get_application():
 app = get_application()
 
 app.include_router(routers.router)
-
-
-@app.on_event('startup')
-async def on_startup():
-    await init_db()
