@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlmodel import SQLModel
 
 from alembic import context
-from app.models import database_models
+from app.core.models import database_models
 
 # импортируем все модели из всех приложений
 models_for_migrate = database_models

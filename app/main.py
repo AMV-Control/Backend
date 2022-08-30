@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 
-from . import routers
+from .core import routers
 
 
 def get_application():
