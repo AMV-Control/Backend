@@ -4,15 +4,17 @@ services:
   app:
     build: .
     env_file:
-      - .env
+      - .env_compose
     ports:
       - "8080:8000"
 
 
   database:
     image: postgres:12
-    env_file:
-      - .env
     ports:
-      - "5431:5432"
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
 

@@ -8,7 +8,9 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlmodel import SQLModel
 
 from alembic import context
-from src.core.models import database_models
+
+from app.core.config import settings
+from app.core.models import database_models
 
 # импортируем все модели из всех приложений
 models_for_migrate = database_models
@@ -16,6 +18,9 @@ models_for_migrate = database_models
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
+# получаем URL базы данных из настроек приложения
+config.set_main_option('sqlalchemy.url', settings.DATABASE_URL)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

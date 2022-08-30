@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.core.config import settings
+from app.core.config import settings
 
-from .core import routers
+from app.core import routers
 
 
 def get_application():

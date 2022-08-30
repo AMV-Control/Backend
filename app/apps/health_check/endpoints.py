@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Response, status
 
-from src.apps.health_check.services.health_checker import HealthCheckService
+from app.apps.health_check.services.health_checker import HealthCheckService
 from . import schemas
 
 router = APIRouter(prefix='/health_check', tags=['health_check'])
