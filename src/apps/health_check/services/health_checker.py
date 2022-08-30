@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from .. import schemas
 from .. import models
-from app.core.database import get_session
+from src.core.database import get_session
 
 
 class HealthCheckService:
