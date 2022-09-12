@@ -21,4 +21,4 @@ def get_application():
 
 app = get_application()
 
-app.include_router(routers.router)
+app.include_router(routers.router, prefix='/api')
