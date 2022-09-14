@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     # - postgresql+asyncpg://postgres:postgres@database:5432/app
     DATABASE_URL: str
 
+    # база данных для тестов
+    TEST_DATABASE_URL: str = 'sqlite+aiosqlite:///./test_db.sqlite3'
+
     class Config:
         case_sensitive = True
         env_file = '.env'

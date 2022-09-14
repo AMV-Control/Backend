@@ -1,14 +1,13 @@
 import asyncio
+import os
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+from sqlalchemy import engine_from_config, pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlmodel import SQLModel
 
 from alembic import context
-
 from app.core.config import settings
 from app.core.models import database_models
 
@@ -20,7 +19,10 @@ models_for_migrate = database_models
 config = context.config
 
 # получаем URL базы данных из настроек приложения
-config.set_main_option('sqlalchemy.url', settings.DATABASE_URL)
+if os.environ.get('TESTING'):
+    config.set_main_option('sqlalchemy.url', settings.TEST_DATABASE_URL)
+else:
+    config.set_main_option('sqlalchemy.url', settings.DATABASE_URL)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -84,7 +86,7 @@ async def run_migrations_online() -> None:
             prefix='sqlalchemy.',
             poolclass=pool.NullPool,
             future=True,
-        )
+        )  # type: ignore
     )
 
     async with connectable.connect() as connection:
