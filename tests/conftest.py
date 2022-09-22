@@ -5,7 +5,7 @@ import pytest
 from fastapi import FastAPI
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, create_async_engine
-from sqlalchemy_utils import create_database, database_exists
+from sqlalchemy_utils import database_exists, drop_database
 
 from alembic import command
 from alembic.config import Config
@@ -24,15 +24,21 @@ def anyio_backend():
 def db_engine():
     engine = create_async_engine(settings.TEST_DATABASE_URL,
                                  pool_pre_ping=True, echo=True)
-    if not database_exists:
-        create_database(engine.url)
+
+    # удаляем старую тестовую базу данных
+    if database_exists(engine.url):
+        drop_database(engine.url)
 
     # загружаем конфигурацию alembic
     alembic_cfg = Config('alembic.ini')
+
     # выполняем миграции
     command.upgrade(alembic_cfg, 'head')
 
     yield engine
+
+    # после выполнения тестов, удаляем тестовую базу данных
+    drop_database(engine.url)
 
 
 @pytest.fixture()
