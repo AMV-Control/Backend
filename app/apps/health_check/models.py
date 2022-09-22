@@ -1,7 +1,8 @@
-from sqlmodel import SQLModel, Field
+from sqlmodel import Field
+
+from app.core.database import BaseSQLModel
 
 
-class HealthCheckResult(SQLModel, table=True):
-    id: int = Field(default=None, primary_key=True)
+class HealthCheckResult(BaseSQLModel, table=True):
     status: str = Field()
     detail: str = Field()
